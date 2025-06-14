@@ -1,0 +1,20 @@
+{
+  "BLQ-TFS": {
+    "origin": "BLQ",
+    "destination": "TFS",
+    "departure_date": "2025-08-01",
+    "currency": "EUR",
+    "max_offers": 10,
+    "adults": 2,
+    "travel_class": "ECONOMY"
+  },
+  "TFS-BLQ": {
+    "origin": "TFS",
+    "destination": "BLQ",
+    "departure_date": "2025-08-01",
+    "currency": "EUR",
+    "max_offers": 10,
+    "adults": 2,
+    "travel_class": "ECONOMY"
+  }
+}

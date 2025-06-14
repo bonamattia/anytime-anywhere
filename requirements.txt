@@ -1,0 +1,8 @@
+amadeus==12.0.0
+dotenv==0.9.9
+isodate==0.7.2
+pydantic==2.11.5
+pandas==2.2.3
+azure-functions==1.23.0
+azure-data-tables==12.7.0
+python-dotenv~=1.1.0
