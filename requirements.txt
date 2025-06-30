@@ -6,3 +6,4 @@ pandas==2.2.3
 azure-functions==1.23.0
 azure-data-tables==12.7.0
 python-dotenv~=1.1.0
+pytz~=2025.2

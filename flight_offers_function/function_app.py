@@ -6,6 +6,8 @@ from dotenv import load_dotenv
 from shared.validation import FlightSearchConfig
 from shared.amadeus_api import AmadeusAPI
 from .table_utils import save_df_to_azure_table
+from datetime import datetime
+import pytz
 
 # Optional in Azure, but useful locally
 load_dotenv()
@@ -17,6 +19,10 @@ def offer_to_row(offer: dict, config: FlightSearchConfig) -> dict:
 
     cabin_bags_each = fare_details.get('includedCabinBags', {}).get('quantity', 0)
     checked_bags_each = fare_details.get('includedCheckedBags', {}).get('quantity', 0)
+
+    # Get the current timestamp in the Rome timezone
+    rome_tz = pytz.timezone('Europe/Rome')
+    search_timestamp = datetime.now(rome_tz).strftime('%Y-%m-%dT%H:%M:%S')
 
     return {
         'PartitionKey': f"{config.origin}-{config.destination}",
@@ -33,7 +39,8 @@ def offer_to_row(offer: dict, config: FlightSearchConfig) -> dict:
         'FareBasis': fare_details.get('fareBasis', 'N/A'),
         'BrandedFare': fare_details.get('brandedFare', 'N/A'),
         'TotalCabinBags': cabin_bags_each * config.adults,
-        'TotalCheckedBags': checked_bags_each * config.adults
+        'TotalCheckedBags': checked_bags_each * config.adults,
+        'SearchTimestamp': search_timestamp  # Add the search timestamp
     }
 
 
