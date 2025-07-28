@@ -119,9 +119,9 @@ def offer_to_row(offer: dict, config: FlightSearchConfig) -> dict:
         total_cabin = total_checked = 'N/A'
 
     return {
-        'PartitionKey': f"{config.origin}-{config.destination}",
+        'PartitionKey': research_date,
         'RowKey': offer['id'],
-        'Research_Date': research_date,
+        'Route_Name': f"{config.origin}-{config.destination}",
         'Price_EUR': offer['price']['total'],
         'Airline': offer['validatingAirlineCodes'][0],
         'Stops': len(segments) - 1,
