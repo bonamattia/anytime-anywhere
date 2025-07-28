@@ -10,6 +10,8 @@ from azure.functions import HttpResponse
 import datetime
 
 from dotenv import load_dotenv
+from pandas import DataFrame
+
 from shared.validation import FlightSearchConfig  # :contentReference[oaicite:0]{index=0}
 from shared.amadeus_api import AmadeusAPI
 from shared.table_utils import save_df_to_azure_table  # :contentReference[oaicite:1]{index=1}
@@ -30,7 +32,7 @@ app = func.FunctionApp()
     # schedule="*/1 * * * *",
     # schedule="0 */10 * * * *",
     arg_name="mytimer",
-    run_on_startup=False,
+    run_on_startup=True,
     use_monitor=True
 )
 def scheduled_flight_job() -> None:
@@ -63,7 +65,7 @@ def daterange(start_date, end_date):
         yield (start_date + datetime.timedelta(days=n)).strftime('%Y-%m-%d')
 
 
-def flight_scraper(return_df=False) -> pd.DataFrame:
+def flight_scraper(return_df=False) -> DataFrame | None:
     client_id = os.getenv("AMADEUS_API_KEY")
     client_secret = os.getenv("AMADEUS_API_SECRET")
     config_path = os.path.join(os.getcwd(), "config", "config.json")
