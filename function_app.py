@@ -106,7 +106,7 @@ def flight_scraper(return_df=False) -> DataFrame | None:
 def offer_to_row(offer: dict, config: FlightSearchConfig) -> dict:
     segments = offer['itineraries'][0]['segments']
     rome_tz = pytz.timezone('Europe/Rome')
-    research_date = datetime.datetime.now(rome_tz).strftime('%Y-%m-%dT%H:%M:%S')
+    research_date = datetime.datetime.now(rome_tz).strftime('%Y-%m-%d')
 
     try:
         fd = offer['travelerPricings'][0]['fareDetailsBySegment'][0]

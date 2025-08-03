@@ -1,0 +1,5 @@
+# azurite --silent --location .\azurite.log \
+azure start --verbose
+
+#deploy
+func azure functionapp publish aa-dev-fd-funcapp --python
